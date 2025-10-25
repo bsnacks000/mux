@@ -21,7 +21,6 @@
 extern "C" {
 #endif
 
-#include <assert.h>
 #include <stddef.h>
 
 /**
@@ -76,34 +75,6 @@ static inline void aud_demux1d(float* channels,
     for (size_t i = 0; i < len_chans; i++) {
         for (size_t j = 0; j < n_chans; j++) {
             channels[j * len_chans + i] = interleaved[i * n_chans + j];
-        }
-    }
-}
-
-/**
- * @brief mux n_chans in a 1d array in col major order into an interleaved buffer
- */
-static inline void aud_mux1d_colmaj(float* interleaved,
-                                    const float* channels,
-                                    size_t n_chans,
-                                    size_t len_chans) {
-    for (size_t j = 0; j < n_chans; j++) {
-        for (size_t i = 0; i < len_chans; i++) {
-            interleaved[j * len_chans + i] = channels[j * len_chans + i];
-        }
-    }
-}
-
-/**
- * @brief demux n_chans from an interleaved buffer into a 1d array in col major order.
- */
-static inline void aud_demux1d_colmaj(float* channels,
-                                      const float* interleaved,
-                                      size_t n_chans,
-                                      size_t len_chans) {
-    for (size_t j = 0; j < n_chans; j++) {
-        for (size_t i = 0; i < len_chans; i++) {
-            channels[j * len_chans + i] = interleaved[j * len_chans + i];
         }
     }
 }

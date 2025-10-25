@@ -14,7 +14,7 @@ build:
 	&& cmake .. $(CMAKE_OPTS) \
 	&& cmake --build .
 
-test:
+test: build
 	./build/tests/mux_unit_tests
 
 
