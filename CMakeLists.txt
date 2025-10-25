@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
 
-set(PROJECT_NAME mux)
+set(PROJECT_NAME wavio)
 project(${PROJECT_NAME} LANGUAGES C VERSION 0.1.0)
 
 # std
