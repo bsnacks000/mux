@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: ["dev"]
+  pull_request:
+    branches: ["dev"]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git reference to build (branch, tag, or commit SHA)"
+        required: false
+        default: "dev"
+
+jobs:
+  build-test-multi-platform:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        build_type: [Release, Debug]
+        c_compiler: [gcc, clang]
+        include:
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+          - os: macos-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+          - os: macos-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+
+      - name: Set compilers
+        run: |
+          echo "CC=${{ matrix.c_compiler }}" >> $GITHUB_ENV
+          echo "CXX=${{ matrix.cpp_compiler }}" >> $GITHUB_ENV
+
+      - name: Build and Run Tests.
+        run: |
+          make build BUILD_TYPE=${{ matrix.build_type }}
+          make test

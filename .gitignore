@@ -1,0 +1,50 @@
+# python
+pyrightconfig.json
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+data/
+.python-version
+
+# audio artifacts and dev stuff
+*.wav
+*.aiff
+*.aif
+.zed
+.vscode
+.cache
+*.log
+_local/
+coverage/
+coverage.info
+
+# Compiled object files
+*.o
+*.so
+
+# Executable files
+*.exe
+*.out
+
+# Dependency files
+*.d
+
+# Backup files
+*~
+*.bak
+
+# Temporary files
+*.swp
+*.tmp
+
+# Editor backup files
+*.#
+.#*
+*.swo
+
+# Build directories
+build/
+Debug/
+Release/
