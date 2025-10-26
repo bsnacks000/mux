@@ -9,17 +9,7 @@ add_executable(${UNIT_TEST_NAME}
 # Prefer system packages
 set(CMAKE_FIND_PACKAGE_PREFER_CONFIG TRUE)
 
-# Try to find libsndfile
-find_package(SndFile REQUIRED)
-
-# SndFile::sndfile
-if (NOT SndFile_FOUND)
-    message(FATAL_ERROR "libsndfile not found.")
-endif()
-
-message("Found sndfile!")
-
-target_link_libraries(${UNIT_TEST_NAME} PRIVATE ${PROJECT_NAME} m SndFile::sndfile)
+target_link_libraries(${UNIT_TEST_NAME} PRIVATE ${PROJECT_NAME} SndFile::sndfile)
 target_include_directories(${UNIT_TEST_NAME} PRIVATE ${CMAKE_SOURCE_DIR})
 target_compile_options(${UNIT_TEST_NAME} PRIVATE
     -Wextra -Wall -Wpedantic -Werror
