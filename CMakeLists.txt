@@ -27,7 +27,7 @@ message(" ** sndfile libraries: ${SNDFILE_LIBRARIES}")
 message(" ** sndfile include dirs: ${SNDFILE_INCLUDE_DIRS}")
 
 add_library(${PROJECT_NAME} wavio.c)
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SNDFILE_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PRIVATE PkgConfig::SNDFILE)
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${SNDFILE_INCLUDE_DIRS}
