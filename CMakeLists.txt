@@ -17,18 +17,33 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Enable position independent code for libraries
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-find_path(SNDFILE_INCLUDE_DIR sndfile.h)
-find_library(SNDFILE_LIB sndfile)
-
-if (NOT SNDFILE_INCLUDE_DIR OR NOT SNDFILE_LIB)
-    message(FATAL_ERROR "libsndfile not found.")
+# macOS Homebrew prefix
+if(APPLE)
+    if(NOT DEFINED HOMEBREW_PREFIX)
+        execute_process(COMMAND brew --prefix
+                        OUTPUT_VARIABLE HOMEBREW_PREFIX
+                        OUTPUT_STRIP_TRAILING_WHITESPACE)
+    endif()
 endif()
+
+# Find headers
+find_path(SNDFILE_INCLUDE_DIR NAMES sndfile.h PATHS
+    ${HOMEBREW_PREFIX}/include
+    /usr/local/include
+    /usr/include
+)
+
+# Find library
+find_library(SNDFILE_LIBRARY NAMES sndfile PATHS
+    ${HOMEBREW_PREFIX}/lib
+    /usr/local/lib
+    /usr/lib
+)
 
 message("Found sndfile!")
 
 add_library(${PROJECT_NAME} wavio.c)
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SNDFILE_LIB})
-
+target_link_libraries(${PROJECT_NAME} PRIVATE ${SNDFILE_LIBRARY})
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
