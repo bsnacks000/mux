@@ -17,9 +17,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Enable position independent code for libraries
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# INTERFACE target for header-only library
-add_library(${PROJECT_NAME} INTERFACE)
-target_include_directories(${PROJECT_NAME} INTERFACE
+
+add_library(${PROJECT_NAME} wavio.c)
+target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 

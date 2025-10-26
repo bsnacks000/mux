@@ -15,7 +15,7 @@ build:
 	&& cmake --build .
 
 test: build
-	./build/tests/mux_unit_tests
+	./build/tests/wavio_unit_tests
 
 
 all: clean build
