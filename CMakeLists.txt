@@ -40,12 +40,14 @@ find_library(SNDFILE_LIBRARY NAMES sndfile PATHS
     /usr/lib
 )
 
-message("Found sndfile!")
+message(STATUS "SNDFILE_INCLUDE_DIR: ${SNDFILE_INCLUDE_DIR}")
+message(STATUS "SNDFILE_LIBRARY: ${SNDFILE_LIBRARY}")
 
 add_library(${PROJECT_NAME} wavio.c)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${SNDFILE_LIBRARY})
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${SNDFILE_INCLUDE_DIR}
 )
 
 add_subdirectory(tests)
