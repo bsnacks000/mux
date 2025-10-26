@@ -32,5 +32,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${SNDFILE_INCLUDE_DIRS}
 )
+target_compile_options(${PROJECT_NAME} PRIVATE
+    -Wextra -Wall -Wpedantic -Werror
+)
 
 add_subdirectory(tests)
