@@ -1,3 +1,3 @@
-# mux.h
+# wavio
 
-audio muxing/demuxing utils.
+libsndfile wrapper for easy block based audio I/O
