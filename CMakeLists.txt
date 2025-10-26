@@ -17,18 +17,18 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Enable position independent code for libraries
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# Try to find libsndfile
-find_package(SndFile REQUIRED)
+find_path(SNDFILE_INCLUDE_DIR sndfile.h)
+find_library(SNDFILE_LIB sndfile)
 
-# SndFile::sndfile
-if (NOT SndFile_FOUND)
+if (NOT SNDFILE_INCLUDE_DIR OR NOT SNDFILE_LIB)
     message(FATAL_ERROR "libsndfile not found.")
 endif()
 
 message("Found sndfile!")
 
 add_library(${PROJECT_NAME} wavio.c)
-target_link_libraries(${PROJECT_NAME} PRIVATE SndFile::sndfile)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${SNDFILE_LIB})
+
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
