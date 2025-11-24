@@ -17,23 +17,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Enable position independent code for libraries
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-find_package(PkgConfig REQUIRED)
-if (NOT PkgConfig_FOUND)
-    message(FATAL_ERROR "pkg-config not found.")
-endif()
 
-pkg_check_modules(SNDFILE REQUIRED IMPORTED_TARGET sndfile)
-message(" ** sndfile libraries: ${SNDFILE_LIBRARIES}")
-message(" ** sndfile include dirs: ${SNDFILE_INCLUDE_DIRS}")
-
-add_library(${PROJECT_NAME} wavio.c)
-target_link_libraries(${PROJECT_NAME} PUBLIC PkgConfig::SNDFILE)
-target_include_directories(${PROJECT_NAME} PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${SNDFILE_INCLUDE_DIRS}
-)
-target_compile_options(${PROJECT_NAME} PRIVATE
-    -Wextra -Wall -Wpedantic -Werror
-)
 
 add_subdirectory(tests)

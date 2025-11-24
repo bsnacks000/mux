@@ -1,3 +1,3 @@
 # wavio
 
-libsndfile wrapper for easy block based audio I/O
+libsndfile wrapper for easy wav/aiff block based audio I/O.
