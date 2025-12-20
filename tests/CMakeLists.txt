@@ -6,11 +6,6 @@ add_executable(${UNIT_TEST_NAME}
     ${SRC_FILES}
 )
 
-# Prefer system packages
-#set(CMAKE_FIND_PACKAGE_PREFER_CONFIG TRUE)
-
-set(BUILD_SHARED_LIBS ON)
-
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SNDFILE REQUIRED IMPORTED_TARGET sndfile)
 
