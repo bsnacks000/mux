@@ -175,11 +175,10 @@ sf_count_t wavio_write_block(wavio* self) {
 }
 
 /**
- * @brief read the next block. If sf_count_t returns 0 we have reached EOF. The
- * second to last read may return a partial block. Depending on the application may
- * have to pad zeros (or should have already!) on a partial.
+ * @brief read the next block. If sf_count_t returns 0 we have reached EOF.
  */
 sf_count_t wavio_read_block(wavio* self) {
+    memset(self->block, 0, self->block_nbytes);
     return sf_readf_float(self->handle, self->block, self->n_frames);
 }
 
